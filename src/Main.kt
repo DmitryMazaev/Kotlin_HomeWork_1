@@ -8,20 +8,22 @@ add <Имя> email <Адрес электронной почты>
 
 fun main() {
     while (true) {
-        print("Введите действие: 1. exit 2. help 3. add phone 4. add email: ")
+        print("Введите действие: 1. exit 2. help 3. add <Имя> phone <Номер телефона> 4. add <Имя> email <Адрес электронной почты>: ")
         val a: String = enterInConsole()
-        if (a == "exit") {
+        val del = " "
+        val command = a.split(del)
+        if (command[0] == "exit") {
             println("Вы выбрали команду exit, до свидания!")
             break
         }
-        if (a  == "help") {
+        if (command[0]  == "help") {
             help()
         }
-        if (a == "add phone") {
-            addPhone()
+        if (command[0] == "add" && command[2] == "phone") {
+            addPhone(command[1], command[3])
         }
-        if (a == "add email") {
-            addEmail()
+        if (command[0] == "add" && command[2] == "email") {
+            addEmail(command[1], command[3])
         }
     }
 }
@@ -31,7 +33,7 @@ fun help() {
     println("Чтобы выйти, введите в консоль exit \n" +
             "Чтобы получить помощь, введите в консоль help \n" +
             "Чтобы добавить нового пользователя и его номер телефона, введите в консоль add phone \n" +
-            "Чтобы добавить нового пользователя и его лектронную почту, введите в консоль add email")
+            "Чтобы добавить нового пользователя и его электронную почту, введите в консоль add email")
 }
 
 fun enterInConsole(): String {
@@ -39,17 +41,9 @@ fun enterInConsole(): String {
     return enter
 }
 
-fun addPhone() {
-    print("Введите имя пользователя: ")
-    var name: String? = readlnOrNull()
-    print("Введите номер телефона: ")
-    var number: String? = readlnOrNull()
-    println("Имя: $name, номер телефона: $number")
+fun addPhone(name: String, phone: String) {
+    println("Имя: $name, номер телефона: $phone")
 }
-fun addEmail() {
-    print("Введите имя пользователя: ")
-    var name: String? = readlnOrNull()
-    print("Введите электронную почту: ")
-    var email: String? = readlnOrNull()
+fun addEmail(name: String, email: String) {
     println("Имя: $name, электронная почта: $email")
 }
